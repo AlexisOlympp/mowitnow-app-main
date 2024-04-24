@@ -6,13 +6,18 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(JUnit4.class)
 public class MowerManagerTest {
 
     @Test
     public void isMoveBlockedTest() {
-        MowerManager manager = new MowerManager(5, 5, new ArrayList<>());
+    	List<String> fileLines = new ArrayList<>();
+    	fileLines.add("5 5");
+    	fileLines.add("1 2 N GAGAGAGAA");
+        MowerManager manager = new MowerManager();
+        manager.initialize(fileLines);
 
         Assert.assertTrue(manager.isMoveBlocked(new Mower(2, 5, "N")));
         Assert.assertTrue(manager.isMoveBlocked(new Mower(5, 2, "E")));

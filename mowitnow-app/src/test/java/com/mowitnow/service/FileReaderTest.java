@@ -3,8 +3,7 @@ package com.mowitnow.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,25 +15,15 @@ public class FileReaderTest {
 	@Test
 	public void readTest() {
 		FileReader reader = new FileReader();
+
+		List<String> wrongFileResult = reader.read("./src/test/resources/toto.txt");
+
+		assertNotNull(wrongFileResult);
+		assertEquals(0, wrongFileResult.size());
 		
-		
-		File directory = new File("./src/test/resources/");
-		   System.out.println(directory.getAbsolutePath());
-		try {
-			reader.read("./src/test/resources/toto.txt");
-		} catch(IOException e) {
-			//Assert
-		}
-		
-		try {
-			reader.read("./src/test/resources/input.txt");
-		} catch(IOException e) {
-			//Assert
-		}
-		
-		assertEquals(5, reader.getMaxX());
-		assertEquals(5, reader.getMaxY());
-		assertNotNull(reader.getCommandList());
-		assertEquals(2, reader.getCommandList().size());
+		List<String> rightFileResult = reader.read("./src/test/resources/input.txt");
+
+		assertNotNull(rightFileResult);
+		assertEquals(3, rightFileResult.size());
 	}
 }
