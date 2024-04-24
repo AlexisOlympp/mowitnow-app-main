@@ -32,7 +32,7 @@ public class FileReader {
         return commandList;
     }
 
-    public void read(final String fileName) throws FileNotFoundException {
+    public List<String> read(final String fileName) {
         List<String> fileLine = new ArrayList<>();
 
         File file = new File(fileName);
@@ -43,18 +43,10 @@ public class FileReader {
                 String line = scanner.nextLine();
                 fileLine.add(line);
             }
-
         } catch (FileNotFoundException e) {
             logger.error("Le fichier est introuvable !");
-            throw e;
         }
-
-        String size = fileLine.removeFirst();
-        String[] xy= size.split(" ");
-        maxX = Integer.parseInt(xy[0]);
-        maxY = Integer.parseInt(xy[1]);
-
-        commandList = fileLine;
-
+        
+        return fileLine;
     }
 }

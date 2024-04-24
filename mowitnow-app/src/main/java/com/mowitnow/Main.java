@@ -4,6 +4,7 @@ import com.mowitnow.service.FileReader;
 import com.mowitnow.service.MowerManager;
 
 import java.io.FileNotFoundException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -18,13 +19,10 @@ public class Main {
         in.close();
 
         FileReader reader = new FileReader();
-        try {
-            reader.read(fileName);
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found!");
-        }
+        List<String> fileLines = reader.read(fileName);
 
-        MowerManager manager = new MowerManager(reader.getMaxX(), reader.getMaxY(), reader.getCommandList());
+        MowerManager manager = new MowerManager();
+        manager.initialize(fileLines);
         manager.execute();
     }
 }
